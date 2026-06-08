@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import seaborn as sns
+import pandas as pd
 
 def plot_pnl_distribution(df):
     plt.figure(figsize=(8,5))
@@ -55,3 +56,34 @@ def plot_trade_size(df):
     )
 
     plt.close()
+
+def feature_importance_plot(feature_df: pd.DataFrame):
+    feature_df = feature_df.sort_values(
+        by="Importance",
+        ascending=True
+    )
+
+    plt.figure(figsize=(8, 5))
+
+    plt.barh(
+        feature_df["Feature"],
+        feature_df["Importance"]
+    )
+
+    plt.xlabel("Importance")
+    plt.ylabel("Feature")
+    plt.title("Feature Importance")
+
+    plt.tight_layout()
+
+    plt.savefig(
+        "outputs/feature_importance.png",
+        dpi=300,
+        bbox_inches="tight"
+    )
+
+    plt.close()
+
+    print(
+        "Saved: outputs/feature_importance.png"
+    )

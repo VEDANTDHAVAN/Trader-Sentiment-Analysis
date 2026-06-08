@@ -2,6 +2,8 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
+import pandas as pd
+import matplotlib.pyplot as plt
 
 def train_model(df):
     data = df.copy()
@@ -48,6 +50,63 @@ def train_model(df):
 
     preds = model.predict(
         X_test
+    )
+
+    # Added feature importance reporting.
+    # Reason: A research project should explain WHY predictions happen, not just report accuracy.
+    importance = pd.DataFrame({
+        "Feature": features, 
+        "Importance": model.feature_importances_
+    })
+
+    importance = (
+        importance.sort_values(
+            "Importance", ascending=False
+        )
+    )
+
+    # Feature Importance
+    importance = pd.DataFrame({
+        "Feature": features,
+        "Importance": model.feature_importances_
+    })
+
+    importance = importance.sort_values(
+        by="Importance",
+        ascending=False
+    )
+
+    print("\nFeature Importance")
+    print(importance)
+
+    importance.to_csv(
+        "outputs/feature_importance.csv",
+        index=False
+    )
+
+    # Generate Feature Importance Plot
+    plt.figure(figsize=(8, 5))
+
+    plt.barh(
+        importance["Feature"][::-1],
+        importance["Importance"][::-1]
+    )
+
+    plt.xlabel("Importance")
+    plt.ylabel("Feature")
+    plt.title("Random Forest Feature Importance")
+
+    plt.tight_layout()
+
+    plt.savefig(
+        "outputs/feature_importance.png",
+        dpi=300, bbox_inches="tight"
+    )
+
+    plt.close()
+
+    print(
+        "Saved: outputs/feature_importance.png"
     )
 
     print(

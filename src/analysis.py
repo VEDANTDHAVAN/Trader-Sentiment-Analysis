@@ -50,3 +50,37 @@ def coin_analysis(df):
         df.groupby("Coin")["Closed PnL"]
         .sum().sort_values(ascending=False)
     )
+
+# 8. Coin Sentiment Analysis
+def coin_sentiment_analysis(df):
+    return pd.pivot_table(
+        df, values="Closed PnL", index="Coin",
+        columns="Classification", aggfunc="mean"
+    )
+
+# 9. Trader Segmentation
+def trader_segmentation(df):
+    trader_stats = (
+        df.groupby("Account").agg(
+            Total_PnL=("Closed PnL", "sum"),
+            Trades=("Trade ID", "count")
+        )
+    )
+
+    trader_stats["Rank"] = (
+        trader_stats["Total_PnL"].rank(pct=True)
+    )
+
+    trader_stats["Segment"] = "Middle"
+
+    trader_stats.loc[
+        trader_stats["Rank"] >= 0.90,
+        "Segment"
+    ] = "Top"
+
+    trader_stats.loc[
+        trader_stats["Rank"] <= 0.10,
+        "Segment"
+    ] = "Bottom"
+
+    return trader_stats

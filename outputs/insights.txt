@@ -1,0 +1,52 @@
+TRADER SENTIMENT ANALYSIS INSIGHTS
+==================================================
+
+1. Statistical Significance
+------------------------------
+ANOVA F-Statistic: 9.0622
+P-Value: 0.000000
+
+Result: Market sentiment has a statistically significant impact on profitability.
+
+2. Average Profitability by Sentiment
+------------------------------
+Classification
+Extreme Fear     34.537862
+Extreme Greed    67.892861
+Fear             54.290400
+Greed            42.743559
+Neutral          34.307718
+
+Highest average profitability occurred during 'Extreme Greed' periods (67.89).
+
+3. Win Rate by Sentiment
+------------------------------
+Classification
+Extreme Fear     37.060748
+Extreme Greed    46.494299
+Fear             42.076750
+Greed            38.482794
+Neutral          39.699093
+
+Highest win rate occurred during 'Extreme Greed' periods (46.49%).
+
+4. Top Performing Coins
+------------------------------
+Coin
+@107       2.783913e+06
+HYPE       1.948485e+06
+SOL        1.639556e+06
+ETH        1.319979e+06
+BTC        8.680447e+05
+MELANIA    3.903511e+05
+ENA        2.173295e+05
+SUI        1.992688e+05
+ZRO        1.837778e+05
+DOGE       1.475432e+05
+
+5. Key Conclusions
+------------------------------
+• Market sentiment significantly affects trader profitability.
+• Extreme Greed periods generated the highest profitability and win rates.
+• Asset selection remains an important factor in trader success.
+• Sentiment indicators can be incorporated into trading strategies for better decision-making.

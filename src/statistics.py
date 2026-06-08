@@ -1,24 +1,25 @@
-from typing import Tuple, cast
-from scipy.stats import ttest_ind
+# Replace the t-test with ANOVA.
+
+# Reason:
+# 5 sentiment classes exist
+
+# ANOVA is statistically correct.
+from scipy.stats import f_oneway
 
 
-def sentiment_significance(df) -> Tuple[float, float]:
+def sentiment_significance(df):
 
-    fear = df[
-        df["Classification"] == "Fear"
-    ]["Closed PnL"]
+    groups = []
 
-    greed = df[
-        df["Classification"] == "Greed"
-    ]["Closed PnL"]
+    for sentiment in df["Classification"].unique():
 
-    result = ttest_ind(
-        fear,
-        greed,
-        equal_var=False
-    )
+        group = df[
+            df["Classification"]
+            == sentiment
+        ]["Closed PnL"]
 
-    statistic = cast(float, result[0])
-    pvalue = cast(float, result[1])
+        groups.append(group)
 
-    return statistic, pvalue
+    f_stat, p_value = f_oneway(*groups)
+
+    return f_stat, p_value
