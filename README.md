@@ -415,6 +415,15 @@ Trade direction and asset selection are substantially stronger predictors of pro
 
 ---
 
+### Most Important Features
+
+1. Direction
+2. Coin
+3. Fee
+4. Size USD
+5. Side
+6. Classification
+
 ## Key Insights
 
 1. Market sentiment has a statistically significant relationship with trader profitability.
